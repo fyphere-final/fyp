@@ -1,14 +1,15 @@
-/** Mosque mark used on Welcome, Login and the desktop rail. */
-export function BrandMark({ className = 'h-14 w-14', stroke = '#C49C5C', bg = 'none' }) {
+/** Mosque mark: double gold ring + arched mosque glyph (Welcome mockup). */
+export function BrandMark({ className = 'h-[90px] w-[90px]', stroke = '#C6A15B' }) {
   return (
-    <svg viewBox="0 0 64 64" className={className} fill={bg} aria-hidden>
-      <rect x="1.5" y="1.5" width="61" height="61" rx="18" stroke={stroke} strokeWidth="1.5" fill={bg} />
-      <g fill="none" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M32 11v5M29.5 13.5h5" />
-        <path d="M21 30c0-8 5-13 11-13s11 5 11 13" />
-        <path d="M17 30h30v17H17z" />
-        <path d="M27 47V38c0-3 2-5 5-5s5 2 5 5v9" />
-        <path d="M13 47h38" />
+    <svg viewBox="0 0 90 90" className={className} fill="none" aria-hidden>
+      <circle cx="45" cy="45" r="44.5" stroke={stroke} strokeWidth="1" />
+      <circle cx="45" cy="45" r="36" stroke={stroke} strokeOpacity=".45" strokeWidth="1" />
+      <g stroke={stroke} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M45 22v6M42 25h6" />
+        <path d="M32 63V47c0-8 5-14 13-14s13 6 13 14v16" />
+        <path d="M40 63V54c0-3 2-5 5-5s5 2 5 5v9" />
+        <path d="M26 63V50l3-3 3 3M58 63V50l3-3 3 3" strokeWidth="2" />
+        <path d="M24 63h42" />
       </g>
     </svg>
   );

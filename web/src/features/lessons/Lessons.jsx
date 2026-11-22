@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BookOpen, BarChart3, ChevronDown, Plus } from 'lucide-react';
+import { BookOpen, BarChart3, ChevronDown, Lock, Plus } from 'lucide-react';
 import { studentApi } from '../../api/endpoints';
 import { errorMessage, errorStatus } from '../../api/client';
 import { useAsync } from '../../lib/useAsync';
 import { t } from '../../lib/strings';
-import { urduNum } from '../../lib/format';
-import { EmptyState, ErrorState, LockBadge, Page, PageHeader, SkeletonList } from '../../components/ui';
+import { num } from '../../lib/format';
+import { EmptyState, ErrorState, NumBadge, Page, PageHeader, SkeletonList } from '../../components/ui';
 
 function Action({ to, icon: Icon, label, sub }) {
   return (
-    <Link to={to} className="flex min-h-[4.25rem] min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl border border-cream-line bg-white px-2 py-2 text-maroon transition hover:border-gold hover:bg-cream">
-      <Icon size={20} />
-      <span className="ui-text text-sm font-bold leading-snug">{label}</span>
-      <span className="ui-text text-[0.7rem] leading-snug text-ink-soft">{sub}</span>
+    <Link to={to} className="flex h-[75px] min-w-0 flex-1 flex-col items-center justify-center rounded-2xl border border-gold-soft bg-cream px-1 text-maroon transition hover:border-gold">
+      <Icon size={20} strokeWidth={1.8} />
+      <span className="ui-text mt-1 text-[12.4px] font-bold leading-[18px] text-ink">{label}</span>
+      <span className="ui-text text-[10px] leading-[14px] text-ink-soft">{sub}</span>
     </Link>
   );
 }
@@ -21,37 +21,37 @@ function Action({ to, icon: Icon, label, sub }) {
 function LessonCard({ lesson, base, defaultOpen }) {
   const [open, setOpen] = useState(defaultOpen);
   const locked = lesson.locked;
-  const head = (
-    <>
-      <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-ui text-lg font-bold ${locked ? 'bg-cream-deep text-ink-soft/60' : 'bg-cream-deep text-maroon'}`}>
-        {locked ? <LockBadge className="!h-auto !w-auto !bg-transparent" /> : urduNum(lesson.lessonNo)}
-      </span>
-      <div className="min-w-0 flex-1 text-start">
-        <p className="ui-text text-xs font-bold text-ink-soft">{t.lesson} {urduNum(lesson.lessonNo)}</p>
-        <h3 className={`urdu text-xl font-bold ${locked ? 'text-ink-soft' : 'text-maroon-dark'}`}>{lesson.title}</h3>
-        <p className="ui-text mt-1 text-xs text-ink-soft">
-          {lesson.unavailable ? t.unavailable : locked ? t.lessonUnlockHint : (
-            <>
-              {urduNum(lesson.wordCount)} الفاظ
-              {lesson.quizBestPct != null && <> · {t.jaiza} {urduNum(lesson.quizBestPct)}٪</>}
-              {lesson.completed && <> · ✓ {t.complete}</>}
-            </>
-          )}
-        </p>
-      </div>
-    </>
-  );
+
   if (locked) {
-    return <div aria-disabled className="flex min-w-0 items-center gap-3 rounded-2xl border border-cream-line/70 bg-cream-deep/40 p-4 opacity-70">{head}</div>;
+    return (
+      <div aria-disabled className="flex min-w-0 items-center gap-[13px] rounded-[20px] border border-[#F3E7D6] bg-[#FDF7EE] px-[15px] py-[12px]">
+        <NumBadge locked />
+        <div className="min-w-0 flex-1 text-start">
+          <p className="ui-text text-[10px] font-bold leading-4 text-[#BFA9A4]">{t.lesson} {num(lesson.lessonNo)}</p>
+          <h3 className="urdu text-[15px] font-medium leading-[32px] text-[#B8A09B]">{lesson.title}</h3>
+          <p className="ui-text text-[10.7px] leading-4 text-[#BFA9A4]">{lesson.unavailable ? t.unavailable : t.lessonUnlockHint}</p>
+        </div>
+        <Lock size={15} className="shrink-0 text-[#C9B3AC]" />
+      </div>
+    );
   }
   return (
-    <div className="card min-w-0 p-4">
-      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex min-h-tap w-full min-w-0 items-center gap-3">
-        {head}
-        <ChevronDown size={20} className={`shrink-0 text-ink-soft transition ${open ? 'rotate-180' : ''}`} />
+    <div className="min-w-0 rounded-[20px] border border-cream-track bg-white px-[15px] pb-3 pt-[15px] shadow-soft">
+      <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex min-h-[60px] w-full min-w-0 items-center gap-[13px]">
+        <NumBadge>{num(lesson.lessonNo)}</NumBadge>
+        <div className="min-w-0 flex-1 text-start">
+          <p className="ui-text text-[10px] font-bold leading-4 text-ink-soft">{t.lesson} {num(lesson.lessonNo)}</p>
+          <h3 className="urdu !py-0 mt-0.5 text-[15px] font-bold !leading-7 text-ink">{lesson.title}</h3>
+          <p className="ui-text text-[10.7px] leading-[14px] text-ink-soft">
+            {num(lesson.wordCount)} الفاظ
+            {lesson.quizBestPct != null && <> · {t.jaiza} {num(lesson.quizBestPct)}%</>}
+            {lesson.completed && <> · ✓</>}
+          </p>
+        </div>
+        <ChevronDown size={18} className={`shrink-0 text-ink-soft transition ${open ? '' : '-rotate-90'}`} />
       </button>
       {open && (
-        <div className="fade-in mt-4 flex gap-2.5">
+        <div className="fade-in mt-[15px] flex gap-2">
           <Action to={`${base}/sabaq`} icon={BookOpen} label={t.sabaq} sub={t.sabaqSub} />
           <Action to={`${base}/exercise`} icon={BarChart3} label={t.mashq} sub={t.mashqSub} />
           <Action to={`${base}/quiz`} icon={Plus} label={t.jaiza} sub={t.jaizaSub} />
@@ -69,15 +69,15 @@ export default function Lessons() {
 
   return (
     <>
-      <PageHeader subtitle={`${t.unit} ${urduNum(unitno)}`} title={data?.unit.title ?? t.loading} backTo="/dashboard" />
-      <Page>
-        <div className="mb-5">
-          <h2 className="urdu text-2xl sm:text-3xl">{t.unitLessonsTitle}</h2>
-          <p className="ui-text mt-2 text-sm text-ink-soft">{t.unitLessonsHint}</p>
+      <PageHeader subtitle={`${t.unit} ${num(unitno)}`} title={data?.unit.title ?? t.loading} backTo="/dashboard" />
+      <Page className="!pt-8">
+        <div className="mb-[26px]">
+          <h2 className="ui-text text-[24px] font-normal leading-9">{t.unitLessonsTitle}</h2>
+          <p className="ui-text mt-[5px] text-[12.7px] font-semibold leading-5 text-ink-soft">{t.unitLessonsHint}</p>
         </div>
         {error ? (
           <ErrorState message={errorStatus(error) === 404 ? 'Unit not found' : errorMessage(error)} onRetry={reload} />
-        ) : loading ? <SkeletonList rows={4} className="h-24" /> : !data.lessons.length ? <EmptyState message={t.emptyUnits} /> : (
+        ) : loading ? <SkeletonList rows={4} className="h-[90px] !rounded-[20px]" /> : !data.lessons.length ? <EmptyState message={t.emptyUnits} /> : (
           <div className="fade-in grid min-w-0 items-start gap-3 md:grid-cols-2 xl:grid-cols-3">
             {data.lessons.map((l) => (
               <LessonCard key={l.lessonNo} lesson={l} base={`/units/${unitno}/lessons/${l.lessonNo}`} defaultOpen={l === firstOpen} />

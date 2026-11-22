@@ -10,8 +10,8 @@ async function lessonAccess(req, _res, next) {
     const curriculum = await getCurriculum(req.user.sid);
     const found = findLesson(curriculum, unitno, lessonNo);
     if (!found) return next(notFound('Lesson not found'));
-    if (!found.lesson.playable) return next(conflict('This lesson is not available yet'));
-    if (found.lesson.locked) return next(forbidden('Complete the previous lesson to unlock this one'));
+    if (!found.lesson.playable) return next(conflict('یہ سبق ابھی دستیاب نہیں۔'));
+    if (found.lesson.locked) return next(forbidden('اس سبق کو کھولنے کے لیے پچھلا سبق مکمل کریں۔'));
     req.unit = found.unit;
     req.lesson = found.lesson;
     next();

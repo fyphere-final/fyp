@@ -24,10 +24,10 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/units" element={<UnitsPage />} />
         <Route path="/progress" element={<Progress />} />
-        <Route path="/units/:unitno/lessons" element={<Lessons />} />
       </Route>
 
       <Route element={<ProtectedRoute><LessonLayout /></ProtectedRoute>}>
+        <Route path="/units/:unitno/lessons" element={<Lessons />} />
         <Route path="/units/:unitno/lessons/:lessonNo/sabaq" element={<Sabaq />} />
         <Route path="/units/:unitno/lessons/:lessonNo/exercise" element={<Exercise />} />
         <Route path="/units/:unitno/lessons/:lessonNo/quiz" element={<Quiz />} />

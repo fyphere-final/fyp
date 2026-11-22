@@ -1,0 +1,23 @@
+# dependencies / build output
+node_modules/
+dist/
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# test files and test artifacts (not pushed)
+backend/tests/
+web/e2e/
+web/playwright.config.js
+web/playwright-report/
+web/test-results/
+docs/live-test/
+.playwright-mcp/
+*.test.js
+*.spec.js
+
+# misc
+.DS_Store
+*.log

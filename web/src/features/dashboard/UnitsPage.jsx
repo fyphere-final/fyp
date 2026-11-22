@@ -10,9 +10,9 @@ export default function UnitsPage() {
   const { data, error, loading, reload } = useAsync(studentApi.units, []);
   return (
     <>
-      <PageHeader subtitle={t.myLearning} title={t.units} />
+      <PageHeader subtitle={t.myLearning} title={t.units} backTo="/dashboard" />
       <Page>
-        {error ? <ErrorState message={errorMessage(error)} onRetry={reload} /> : loading ? <SkeletonList rows={3} /> :
+        {error ? <ErrorState message={errorMessage(error)} onRetry={reload} /> : loading ? <SkeletonList rows={3} className="h-[102px] !rounded-[18px]" /> :
           data.units.length ? <div className="fade-in"><UnitList units={data.units} /></div> : <EmptyState message={t.emptyUnits} />}
       </Page>
     </>

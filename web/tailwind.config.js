@@ -4,10 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        maroon: { DEFAULT: '#68202B', dark: '#521922', light: '#7E2C38', soft: '#F6E9E9' },
-        gold: { DEFAULT: '#C49C5C', dark: '#A98040', soft: '#E9D8B8' },
-        cream: { DEFAULT: '#FFF7EC', deep: '#F4E8D4', line: '#E8D7BD' },
-        ink: { DEFAULT: '#2B1418', soft: '#6F5A5D' },
+        maroon: { DEFAULT: '#641F2A', dark: '#4F1822', light: '#7A2C38', soft: '#F6E9E9' },
+        gold: { DEFAULT: '#C6A15B', dark: '#A98040', soft: '#E7D3A9' },
+        cream: { DEFAULT: '#FFF9F0', deep: '#F5E9D8', line: '#DFD0BC', track: '#EDDFCC' },
+        ink: { DEFAULT: '#42151D', soft: '#85736B', faint: '#A58C8B' },
+        label: '#873A46',
         ok: { DEFAULT: '#2E7D4F', soft: '#E7F3EA' },
         bad: { DEFAULT: '#B3372E', soft: '#FBEAE8' },
       },
@@ -18,8 +19,9 @@ export default {
         arabic: ['"Amiri"', '"Scheherazade New"', '"Noto Naskh Arabic"', 'serif'],
       },
       boxShadow: {
-        card: '0 2px 14px rgba(104,32,43,0.07)',
-        btn: '0 8px 18px rgba(104,32,43,0.25)',
+        card: '0 4px 18px rgba(100,31,42,0.07)',
+        soft: '0 8px 28px rgba(100,31,42,0.10)',
+        btn: '0 8px 18px rgba(100,31,42,0.25)',
       },
       minHeight: { tap: '2.75rem' },
       minWidth: { tap: '2.75rem' },

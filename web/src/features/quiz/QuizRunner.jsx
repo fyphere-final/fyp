@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Info } from 'lucide-react';
 import { errorMessage } from '../../api/client';
 import { useAsync } from '../../lib/useAsync';
 import { t } from '../../lib/strings';
-import { OPTION_LETTERS, urduNum } from '../../lib/format';
+import { OPTION_LETTERS, num } from '../../lib/format';
 import { Button, ChoiceOption, ErrorState, Page, PageHeader, ProgressBar, Skeleton, Spinner } from '../../components/ui';
 
 /**
@@ -35,23 +34,23 @@ export default function QuizRunner({ load, submit, title, banner }) {
 
   return (
     <>
-      <PageHeader subtitle={data ? `${data.unitTitle} · ${t.unit} ${urduNum(unitno)}` : ''} title={`${t.lesson} ${urduNum(lessonNo)} · ${title}`} backTo={`/units/${unitno}/lessons`} />
-      <Page className="max-w-2xl">
-        {error ? <ErrorState message={errorMessage(error)} onRetry={reload} /> : loading ? <div className="space-y-4"><Skeleton className="h-6" /><Skeleton className="h-80" /></div> : (
-          <div className="fade-in space-y-4">
+      <PageHeader subtitle={data ? `${data.unitTitle} · ${t.unit} ${num(unitno)}` : ''} title={`${t.lesson} ${num(lessonNo)} · ${title}`} backTo={`/units/${unitno}/lessons`} />
+      <Page className="max-w-2xl !pt-[27px]">
+        {error ? <ErrorState message={errorMessage(error)} onRetry={reload} /> : loading ? <div className="space-y-4"><Skeleton className="h-5" /><Skeleton className="h-80 !rounded-3xl" /></div> : (
+          <div className="fade-in">
             {banner && (
-              <div className="rounded-2xl border border-gold/50 bg-cream-deep p-4">
-                <p className="ui-text flex items-center gap-2 text-sm font-bold"><Info size={16} className="text-gold-dark" />{t.reassessBannerTitle}</p>
-                <p className="ui-text mt-1 text-sm leading-loose text-ink-soft">{t.reassessBanner}</p>
+              <div className="mb-5 rounded-[18px] border border-gold-soft bg-cream-deep px-4 py-[14px]">
+                <p className="ui-text text-[11.7px] font-bold leading-5 text-ink">{t.reassessBannerTitle}</p>
+                <p className="ui-text mt-1 text-[11px] leading-[19px] text-ink-soft">{t.reassessBanner}</p>
               </div>
             )}
-            <p className="ui-text text-sm text-ink-soft">{t.qOf(urduNum(i + 1), urduNum(data.total))}</p>
-            <ProgressBar value={((i + 1) / data.total) * 100} thick />
+            <p className="ui-text text-[11.7px] leading-4 text-ink-soft">{t.qOf(num(i + 1), num(data.total))}</p>
+            <ProgressBar value={((i + 1) / data.total) * 100} className="mt-2.5" />
 
-            <section key={q.qid} className="card fade-in space-y-5 p-4 sm:p-7">
-              <p className="ui-text text-center text-sm text-ink-soft">{t.quizQ}</p>
-              <p className="arabic text-center text-5xl text-maroon-dark sm:text-6xl" lang="ar" dir="rtl">{q.prompt}</p>
-              <div role="radiogroup" aria-label={t.quizQ} className="grid gap-2.5 sm:grid-cols-2">
+            <section key={q.qid} className="fade-in mt-[16px] rounded-3xl border border-cream-track bg-white px-[18px] pb-[18px] pt-[19px] shadow-card">
+              <p className="ui-text text-center text-[12.8px] leading-5 text-ink-soft">{t.quizQ}</p>
+              <p className="arabic !py-0 mt-[12px] text-center text-[34px] !leading-[1.7] text-ink" lang="ar" dir="rtl">{q.prompt}</p>
+              <div role="radiogroup" aria-label={t.quizQ} className="mt-[14px] grid gap-2.5 sm:grid-cols-2">
                 {q.options.map((o, idx) => (
                   <ChoiceOption key={o} letter={OPTION_LETTERS[idx]} selected={answers[q.qid] === o}
                     onClick={() => setAnswers((a) => ({ ...a, [q.qid]: o }))}>{o}</ChoiceOption>
@@ -59,8 +58,8 @@ export default function QuizRunner({ load, submit, title, banner }) {
               </div>
             </section>
 
-            {msg && <p role="alert" className="ui-text rounded-xl bg-bad-soft px-4 py-3 text-sm text-bad">{msg}</p>}
-            <Button onClick={next} disabled={!answers[q.qid] || busy} className="w-full !py-3.5">
+            {msg && <p role="alert" className="ui-text mt-3 rounded-xl bg-bad-soft px-4 py-3 text-[12.5px] text-bad">{msg}</p>}
+            <Button onClick={next} disabled={!answers[q.qid] || busy} className="mt-[17px] w-full !min-h-[48px] !rounded-[14px] !text-[13.7px]">
               {busy && <Spinner />}{last ? t.submitAnswers : t.nextQ}
             </Button>
           </div>

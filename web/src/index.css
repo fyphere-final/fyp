@@ -22,25 +22,27 @@
 }
 
 @layer components {
-  /* Arabic with full airab: generous leading + padding so harakat never clip */
+  /* Arabic words with full airab: calligraphic (Nastaliq) face like the mockups, with room so marks never clip */
   .arabic {
-    @apply font-arabic break-words leading-[2.2];
-    padding-block: 0.2em;
+    @apply font-urdu font-bold break-words leading-[1.9];
+    padding-block: 0.15em;
     font-feature-settings: 'liga' 1, 'calt' 1, 'mark' 1, 'mkmk' 1;
   }
-  .urdu { @apply font-urdu break-words leading-[2.5]; padding-block: 0.15em; }
-  .ui-text { @apply font-ui break-words leading-loose; }
-  .card { @apply min-w-0 max-w-full rounded-2xl border border-cream-line bg-white shadow-card; }
+  /* Urdu lesson titles (Nastaliq) */
+  .urdu { @apply font-urdu break-words leading-[2.1]; padding-block: 0.1em; }
+  /* Urdu interface text (sans) */
+  .ui-text { @apply font-ui break-words; }
+  .card { @apply min-w-0 max-w-full rounded-[22px] border border-cream-track bg-white shadow-card; }
   .btn {
-    @apply inline-flex min-h-tap min-w-tap max-w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5
-      font-ui text-base font-bold transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55;
+    @apply inline-flex min-h-[47px] max-w-full items-center justify-center gap-2 rounded-[14px] px-5 py-2
+      font-ui text-[13.7px] font-bold transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55;
   }
   .btn-primary { @apply bg-maroon text-white shadow-btn hover:bg-maroon-light; }
-  .btn-gold { @apply bg-gold text-maroon-dark shadow-btn hover:bg-gold-dark hover:text-white; }
-  .btn-outline { @apply border border-maroon bg-transparent text-maroon hover:bg-maroon-soft; }
-  .input {
-    @apply min-h-tap w-full rounded-xl border border-cream-line bg-white px-4 py-2.5 text-base text-ink
-      placeholder:text-ink-soft/50 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20;
+  .btn-gold { @apply bg-gold text-[#4a1a20] hover:bg-gold-dark hover:text-white; }
+  .btn-outline { @apply border-[1.5px] border-maroon/70 bg-transparent text-maroon hover:bg-maroon-soft; }
+  .field {
+    @apply min-h-[44px] w-full rounded-[14px] border-[1.5px] border-cream-line bg-white px-4 py-2 text-[13px] text-ink
+      placeholder:text-ink-faint focus:border-maroon focus:outline-none focus:ring-4 focus:ring-maroon/10;
   }
 }
 
