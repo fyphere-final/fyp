@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+    margin: 0;
+    min-width: 320px;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #root { @apply min-h-screen max-w-full overflow-x-hidden; }
+  img, svg { @apply max-w-full; }
+  button { @apply touch-manipulation; }
+  input { @apply min-w-0; }
+  :focus-visible { @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-cream; }
+}
+
+@layer components {
+  /* Arabic with full airab: generous leading + padding so harakat never clip */
+  .arabic {
+    @apply font-arabic break-words leading-[2.2];
+    padding-block: 0.2em;
+    font-feature-settings: 'liga' 1, 'calt' 1, 'mark' 1, 'mkmk' 1;
+  }
+  .urdu { @apply font-urdu break-words leading-[2.5]; padding-block: 0.15em; }
+  .ui-text { @apply font-ui break-words leading-loose; }
+  .card { @apply min-w-0 max-w-full rounded-2xl border border-cream-line bg-white shadow-card; }
+  .btn {
+    @apply inline-flex min-h-tap min-w-tap max-w-full items-center justify-center gap-2 rounded-xl px-5 py-2.5
+      font-ui text-base font-bold transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55;
+  }
+  .btn-primary { @apply bg-maroon text-white shadow-btn hover:bg-maroon-light; }
+  .btn-gold { @apply bg-gold text-maroon-dark shadow-btn hover:bg-gold-dark hover:text-white; }
+  .btn-outline { @apply border border-maroon bg-transparent text-maroon hover:bg-maroon-soft; }
+  .input {
+    @apply min-h-tap w-full rounded-xl border border-cream-line bg-white px-4 py-2.5 text-base text-ink
+      placeholder:text-ink-soft/50 focus:border-maroon focus:outline-none focus:ring-2 focus:ring-maroon/20;
+  }
+}
+
+@keyframes oq-shimmer { 100% { transform: translateX(100%); } }
+.skeleton { position: relative; overflow: hidden; background: #efe3cf; border-radius: 0.75rem; }
+.skeleton::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+  animation: oq-shimmer 1.3s infinite;
+}
+[dir='rtl'] .skeleton::after { animation-direction: reverse; }
+@keyframes oq-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fade-in { animation: oq-fade .28s ease-out both; }
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .skeleton::after { animation: none; }
+}
