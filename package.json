@@ -1,0 +1,13 @@
+{
+  "name": "obaid-qaida",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Obaid Qaida - Phase 1 (student flow). One command: npm start",
+  "scripts": {
+    "start": "node scripts/run.js",
+    "setup": "node scripts/run.js --setup-only"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
