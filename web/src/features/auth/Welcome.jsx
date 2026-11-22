@@ -16,14 +16,14 @@ export default function Welcome() {
       <div aria-hidden className="pointer-events-none absolute bottom-6 left-6 right-6 top-8 mx-auto max-w-[345px] rounded-b-[26px] rounded-t-[172px] border border-gold/30" />
 
       <main className="fade-in relative z-10 flex w-full max-w-[345px] flex-col items-center text-center">
-        <BrandMark />
-        <p className="mt-[25px] text-[13.7px] leading-5 text-gold-soft">A simple journey to understanding the Quran</p>
-        <h1 className="mt-[11px] break-words text-[47px] font-bold leading-[56px]">Obaid Qaida</h1>
-        <p className="mt-4 max-w-[340px] text-[14.6px] leading-[29.5px] text-cream">
+        <BrandMark className="-mt-px h-[90px] w-[90px]" />
+        <p className="mt-[24.5px] text-[13.7px] leading-5 text-gold-soft">A simple journey to understanding the Quran</p>
+        <h1 className="mt-[11px] break-words text-[47px] font-bold leading-[56px] text-cream">Obaid Qaida</h1>
+        <p className="mt-[17.5px] max-w-[340px] text-[14.6px] leading-[29.5px] text-cream/90">
           Learn Quranic vocabulary through simple lessons, meaningful exercises, and short quizzes.
         </p>
-        <Link to="/login" className="btn btn-gold mt-[30px] !h-[47px] w-[331px] max-w-full !rounded-2xl !text-[13.8px]">Start Learning</Link>
-        <p className="mt-5 text-[12.5px] leading-5 text-cream-deep/80">Learn · Practice · Progress</p>
+        <Link to="/login" className="btn btn-gold mt-[29px] !h-[48px] w-[331px] max-w-full !rounded-2xl !pb-0 !pt-[3px] !text-[13.8px]">Start Learning</Link>
+        <p className="mt-5 text-[12.5px] leading-5 text-cream/70">Learn · Practice · Progress</p>
       </main>
     </div>
   );

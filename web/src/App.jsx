@@ -13,6 +13,7 @@ import Quiz from './features/quiz/Quiz';
 import Result from './features/quiz/Result';
 import Reassess from './features/quiz/Reassess';
 import Progress from './features/progress/Progress';
+import Profile from './features/profile/Profile';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/units" element={<UnitsPage />} />
         <Route path="/progress" element={<Progress />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
 
       <Route element={<ProtectedRoute><LessonLayout /></ProtectedRoute>}>

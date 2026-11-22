@@ -17,8 +17,8 @@ function loadEnv() {
     jwtSecret: process.env.JWT_SECRET,
     jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d',
     corsOrigin: (process.env.CORS_ORIGIN || 'http://localhost:5173').split(',').map((s) => s.trim()),
-    passPercent: Math.min(100, Math.max(1, int(process.env.PASS_PERCENT, 70))),
-    quizSize: Math.min(20, Math.max(1, int(process.env.QUIZ_SIZE, 5))),
+    passPercent: Math.min(100, Math.max(1, int(process.env.PASS_PERCENT, 60))),
+    quizSize: Math.min(20, Math.max(1, int(process.env.QUIZ_SIZE, 3))),
     demoPassword: process.env.DEMO_PASSWORD || '123456',
     db: {
       server: process.env.DB_SERVER,

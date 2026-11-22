@@ -41,7 +41,7 @@
   .btn-gold { @apply bg-gold text-[#4a1a20] hover:bg-gold-dark hover:text-white; }
   .btn-outline { @apply border-[1.5px] border-maroon/70 bg-transparent text-maroon hover:bg-maroon-soft; }
   .field {
-    @apply min-h-[44px] w-full rounded-[14px] border-[1.5px] border-cream-line bg-white px-4 py-2 text-[13px] text-ink
+    @apply min-h-[44px] w-full rounded-[14px] border-[1.5px] border-cream-line bg-white px-4 py-2 font-ui text-[14px] text-ink
       placeholder:text-ink-faint focus:border-maroon focus:outline-none focus:ring-4 focus:ring-maroon/10;
   }
 }

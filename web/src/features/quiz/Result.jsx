@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Check, X } from 'lucide-react';
 import { studentApi } from '../../api/endpoints';
@@ -12,6 +13,7 @@ import { ErrorState, Page, PageHeader, ScoreRing, Skeleton } from '../../compone
 export default function Result() {
   const { attemptId } = useParams();
   const { user } = useAuth();
+  const [showReview, setShowReview] = useState(false);
   const { data: r, error, loading, reload } = useAsync(() => studentApi.attempt(attemptId), [attemptId]);
 
   const isRe = r?.kind === 'reassess';
@@ -26,15 +28,13 @@ export default function Result() {
       <PageHeader subtitle={r ? `${r.unitTitle ?? ''} · ${t.unit} ${num(r.unitno)}` : ''} title={isRe ? t.reassessResultTitle : t.resultTitle} backTo={r ? `/units/${r.unitno}/lessons` : '/dashboard'} />
       <Page className="max-w-4xl !pt-[37px]">
         {error ? <ErrorState message={errorMessage(error)} onRetry={reload} /> : loading ? <div className="space-y-4"><Skeleton className="mx-auto h-[150px] w-[150px] !rounded-full" /><Skeleton className="h-20" /></div> : (
-          <div className="fade-in space-y-6 lg:grid lg:grid-cols-[auto_1fr] lg:items-center lg:gap-12 lg:space-y-0">
+          <div className="fade-in space-y-[29px] lg:grid lg:grid-cols-[auto_1fr] lg:items-center lg:gap-12 lg:space-y-0">
             <div className="text-center">
               <ScoreRing value={r.scorePct} label={isRe ? t.reassessScore : t.totalScore} />
               <p className="ui-text mt-[17px] text-[15.3px] font-medium leading-7">{r.passed ? t.wellDone(first) : t.tryAgain(first)}</p>
               <p className="ui-text mt-1 text-[12.7px] leading-5 text-ink-soft">{t.youGot(num(r.correct), num(r.total))}</p>
-              {!isRe && (
-                <p className={`ui-text mx-auto mt-3 inline-block rounded-full px-4 py-1 text-[11px] font-bold ${r.passed ? 'bg-ok-soft text-ok' : 'bg-bad-soft text-bad'}`}>
-                  {r.passed ? t.passed : t.failed(num(r.passPercent))}
-                </p>
+              {!isRe && !r.passed && (
+                <p className="ui-text mx-auto mt-3 inline-block rounded-full bg-bad-soft px-4 py-1 text-[11px] font-bold text-bad">{t.failed(num(r.passPercent))}</p>
               )}
             </div>
 
@@ -52,20 +52,26 @@ export default function Result() {
               </div>
 
               {wrongCount > 0 && (
-                <section className="card p-4">
-                  <h2 className="ui-text mb-2 text-[12.5px] font-bold">{t.reviewTitle}</h2>
-                  <ul className="divide-y divide-cream-track">
-                    {r.review.filter((x) => !x.isCorrect).map((x) => (
-                      <li key={x.qid} className="flex min-w-0 flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2.5">
-                        <span className="arabic text-[22px] text-ink" lang="ar" dir="rtl">{x.prompt}</span>
-                        <span className="min-w-0 text-end">
-                          <span className="ui-text flex items-center gap-1 text-[12px] text-bad"><X size={13} />{x.chosen ?? t.notAnswered}</span>
-                          <span className="ui-text flex items-center gap-1 text-[12px] font-bold text-ok"><Check size={13} />{x.correct}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
+                <div>
+                  <button type="button" onClick={() => setShowReview((v) => !v)} aria-expanded={showReview}
+                    className="ui-text mx-auto flex min-h-[44px] items-center text-[12px] font-bold text-maroon underline underline-offset-4">{showReview ? t.reviewTitle : t.reviewShow}</button>
+                  {showReview && (
+                    <section className="fade-in card mt-1 p-4">
+                      <h2 className="ui-text mb-2 text-[12.5px] font-bold">{t.reviewTitle}</h2>
+                      <ul className="divide-y divide-cream-track">
+                        {r.review.filter((x) => !x.isCorrect).map((x) => (
+                          <li key={x.qid} className="flex min-w-0 flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2.5">
+                            <span className="arabic text-[22px] text-ink" lang="ar" dir="rtl">{x.prompt}</span>
+                            <span className="min-w-0 text-end">
+                              <span className="ui-text flex items-center gap-1 text-[12px] text-bad"><X size={13} />{x.chosen ?? t.notAnswered}</span>
+                              <span className="ui-text flex items-center gap-1 text-[12px] font-bold text-ok"><Check size={13} />{x.correct}</span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
+                  )}
+                </div>
               )}
             </div>
           </div>

@@ -7,7 +7,7 @@ export default {
         maroon: { DEFAULT: '#641F2A', dark: '#4F1822', light: '#7A2C38', soft: '#F6E9E9' },
         gold: { DEFAULT: '#C6A15B', dark: '#A98040', soft: '#E7D3A9' },
         cream: { DEFAULT: '#FFF9F0', deep: '#F5E9D8', line: '#DFD0BC', track: '#EDDFCC' },
-        ink: { DEFAULT: '#42151D', soft: '#85736B', faint: '#A58C8B' },
+        ink: { DEFAULT: '#42151D', soft: '#85736B', faint: '#A58C8B', nav: '#A08E84', icon: '#B2A095', lock: '#C5B9B1' },
         label: '#873A46',
         ok: { DEFAULT: '#2E7D4F', soft: '#E7F3EA' },
         bad: { DEFAULT: '#B3372E', soft: '#FBEAE8' },

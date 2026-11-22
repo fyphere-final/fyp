@@ -48,14 +48,14 @@ export default function Exercise() {
               {data.sections.map((s) => s.kind === 'type' ? (
                 <section key="type" className="card min-w-0 px-[17px] pb-[18px] pt-[21px]">
                   <QPill n={1} />
-                  <p className="ui-text mt-2.5 text-[14px] leading-5">{t.mashqQ1}</p>
-                  <ul className="mt-3 space-y-3">
+                  <p className="ui-text mt-2 text-[14px] leading-5">{t.mashqQ1}</p>
+                  <ul className="mt-[10px] space-y-[10.5px]">
                     {s.questions.map((q) => {
                       const r = review[q.qid];
                       return (
                         <li key={q.qid} className="min-w-0">
                           <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-1.5">
-                            <span className="arabic !py-0 min-w-[100px] max-w-full shrink-0 text-[21px] !leading-[43px] text-ink" lang="ar" dir="rtl">{q.prompt}</span>
+                            <span className="arabic !py-0 min-w-[92px] max-w-full shrink-0 text-[17px] !leading-[43px] text-ink" lang="ar" dir="rtl">{q.prompt}</span>
                             <input value={answers[q.qid] ?? ''} disabled={!!result}
                               onChange={(e) => setAnswers((a) => ({ ...a, [q.qid]: e.target.value }))}
                               aria-label={q.prompt} autoComplete="off" spellCheck={false}
@@ -77,7 +77,7 @@ export default function Exercise() {
                 return (
                   <section key={q.qid} className="card min-w-0 px-[17px] pb-[18px] pt-[21px]">
                     <QPill n={n} />
-                    <p className="ui-text mt-2.5 text-[14px] leading-[22px]">{t.mashqChoice(q.prompt)}</p>
+                    <p className="ui-text mt-2 text-[14px] leading-[22px]">{t.mashqChoice(q.prompt)}</p>
                     <div role="radiogroup" className="mt-[14px] grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                       {q.options.map((o, i) => {
                         const state = r ? (sameOpt(o, r.correct) ? 'correct' : sameOpt(o, r.chosen) ? 'wrong' : undefined) : undefined;

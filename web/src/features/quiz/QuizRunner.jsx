@@ -35,11 +35,11 @@ export default function QuizRunner({ load, submit, title, banner }) {
   return (
     <>
       <PageHeader subtitle={data ? `${data.unitTitle} · ${t.unit} ${num(unitno)}` : ''} title={`${t.lesson} ${num(lessonNo)} · ${title}`} backTo={`/units/${unitno}/lessons`} />
-      <Page className="max-w-2xl !pt-[27px]">
+      <Page className="max-w-2xl !pt-[25px]">
         {error ? <ErrorState message={errorMessage(error)} onRetry={reload} /> : loading ? <div className="space-y-4"><Skeleton className="h-5" /><Skeleton className="h-80 !rounded-3xl" /></div> : (
           <div className="fade-in">
             {banner && (
-              <div className="mb-5 rounded-[18px] border border-gold-soft bg-cream-deep px-4 py-[14px]">
+              <div className="mb-[18px] rounded-[18px] border border-gold-soft bg-cream-deep px-4 py-[11px]">
                 <p className="ui-text text-[11.7px] font-bold leading-5 text-ink">{t.reassessBannerTitle}</p>
                 <p className="ui-text mt-1 text-[11px] leading-[19px] text-ink-soft">{t.reassessBanner}</p>
               </div>
@@ -47,10 +47,10 @@ export default function QuizRunner({ load, submit, title, banner }) {
             <p className="ui-text text-[11.7px] leading-4 text-ink-soft">{t.qOf(num(i + 1), num(data.total))}</p>
             <ProgressBar value={((i + 1) / data.total) * 100} className="mt-2.5" />
 
-            <section key={q.qid} className="fade-in mt-[16px] rounded-3xl border border-cream-track bg-white px-[18px] pb-[18px] pt-[19px] shadow-card">
+            <section key={q.qid} className="fade-in mt-[16px] rounded-3xl border border-cream-track bg-white px-[18px] pb-[24px] pt-[24px] shadow-card">
               <p className="ui-text text-center text-[12.8px] leading-5 text-ink-soft">{t.quizQ}</p>
-              <p className="arabic !py-0 mt-[12px] text-center text-[34px] !leading-[1.7] text-ink" lang="ar" dir="rtl">{q.prompt}</p>
-              <div role="radiogroup" aria-label={t.quizQ} className="mt-[14px] grid gap-2.5 sm:grid-cols-2">
+              <p className="arabic !py-0 mt-[18px] text-center text-[34px] !leading-[1.7] text-ink" lang="ar" dir="rtl">{q.prompt}</p>
+              <div role="radiogroup" aria-label={t.quizQ} className="mt-[19px] grid gap-2.5 sm:grid-cols-2">
                 {q.options.map((o, idx) => (
                   <ChoiceOption key={o} letter={OPTION_LETTERS[idx]} selected={answers[q.qid] === o}
                     onClick={() => setAnswers((a) => ({ ...a, [q.qid]: o }))}>{o}</ChoiceOption>

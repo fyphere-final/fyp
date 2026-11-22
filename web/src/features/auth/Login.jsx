@@ -45,8 +45,8 @@ export default function Login() {
           <p className="text-[11.6px] leading-4 text-gold-soft">Obaid Qaida</p>
           <h1 className="mt-[5px] text-[20.6px] font-bold leading-[30px] lg:text-3xl">Welcome</h1>
         </div>
-        <Link to="/" aria-label="Back" className="group absolute right-[18px] top-[29.5px] inline-flex h-11 w-11 items-center justify-center lg:right-8 lg:top-8">
-          <span className="inline-flex h-[41px] w-[41px] items-center justify-center rounded-xl border border-white/30 bg-white/[0.12] group-hover:bg-white/20"><ChevronLeft size={20} /></span>
+        <Link to="/" aria-label="Back" className="group absolute right-[19px] top-[28.5px] inline-flex h-11 w-11 items-center justify-center lg:right-8 lg:top-8">
+          <span className="inline-flex h-[41px] w-[41px] items-center justify-center rounded-xl border border-white/[0.28] bg-white/10 group-hover:bg-white/20"><ChevronLeft size={20} /></span>
         </Link>
         <div className="hidden max-w-sm lg:block">
           <BrandMark className="h-20 w-20" />
@@ -60,29 +60,29 @@ export default function Login() {
         <div className="fade-in mx-auto w-full max-w-md">
           <p className="text-[11.7px] font-bold leading-[18px] text-label">Obaid Qaida</p>
           <h2 className="mt-[7px] text-[24.3px] font-normal leading-[34px]">Sign in to your account</h2>
-          <p className="mt-[10px] text-[12.7px] leading-[22.5px] text-ink-soft">We will automatically open the correct dashboard for your Gmail account.</p>
+          <p className="mt-[6.5px] text-[12.7px] leading-[22.5px] text-ink-soft">We will automatically open the correct dashboard for your Gmail account.</p>
 
-          <form onSubmit={onSubmit} noValidate className="mt-[20px]">
-            <label htmlFor="email" className="mb-[8px] block text-[12.6px] font-bold leading-5">Gmail account</label>
+          <form onSubmit={onSubmit} noValidate className="mt-[23.5px]">
+            <label htmlFor="email" className="mb-[7px] block text-[12.6px] font-bold leading-5">Gmail account</label>
             <input id="email" type="email" inputMode="email" autoComplete="username" autoCapitalize="none" spellCheck={false}
-              value={email} onChange={(e) => setEmail(e.target.value)} className="field !min-h-[47px] !rounded-[15px] !text-[14px]" />
+              value={email} onChange={(e) => setEmail(e.target.value)} className="field !min-h-[48px] !rounded-[15px] !text-[14px]" />
 
             <label htmlFor="password" className="mb-[9px] mt-[14px] block text-[12.6px] font-bold leading-5">Password</label>
             <div className="relative">
               <input id="password" type="password" autoComplete="current-password"
-                value={password} onChange={(e) => setPassword(e.target.value)} className="field !min-h-[46px] !rounded-[15px] !text-[14px]" />
+                value={password} onChange={(e) => setPassword(e.target.value)} className="field !min-h-[46px] !rounded-[15px] !text-[14px] !font-bold" />
             </div>
 
             {error && <p role="alert" className="mt-4 rounded-xl border border-bad/30 bg-bad-soft px-4 py-3 text-[12.5px] text-bad">{error}</p>}
 
-            <button type="submit" disabled={busy} className="btn btn-primary mt-[16px] !min-h-[47px] !rounded-[15px] !px-[22px] !text-[13.7px]">
+            <button type="submit" disabled={busy} className="btn btn-primary mt-[16px] !min-h-[48px] !rounded-[15px] !px-[17px] !text-[13.7px]">
               {busy && <Spinner />} Sign In
             </button>
           </form>
 
           <div className="mt-[22px] rounded-2xl bg-cream-deep px-4 pb-3 pt-[11px] text-center">
             <p className="text-[11.7px] font-bold leading-[18px] text-maroon">Demo Accounts</p>
-            <p className="mt-[7px] break-all text-[11.6px] leading-[17px] text-ink-soft">student@gmail.com</p>
+            <p className="mt-[5.5px] break-all text-[11.6px] leading-[17px] text-ink-soft">student@gmail.com</p>
             <p className="break-all text-[11.6px] leading-[17px] text-ink-soft">teacher@gmail.com</p>
             <p className="mt-[5px] text-[9.5px] leading-4 text-ink-soft">Password: 123456</p>
           </div>

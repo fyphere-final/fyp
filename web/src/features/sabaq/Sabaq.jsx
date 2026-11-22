@@ -13,10 +13,10 @@ function WordRow({ w, index, value, onChange, onFocus, result, suggestions, onPi
   const state = result ? (result.correct ? 'ok' : 'bad') : null;
   return (
     <li className="min-w-0 border-b border-cream-track py-[15px] last:border-b-0">
-      <div className="flex min-w-0 flex-wrap items-center gap-x-[14px] gap-y-2">
-        <div className="flex min-w-[100px] max-w-full shrink-0 items-center gap-2.5">
+      <div className="flex min-w-0 flex-wrap items-start gap-x-[14px] gap-y-2">
+        <div className="flex h-11 min-w-[92px] max-w-full shrink-0 items-center gap-2.5">
           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cream-deep font-sans text-[11px] font-bold text-maroon">{num(index + 1)}</span>
-          <span className="arabic !py-0 text-[21px] !leading-[44px] text-ink" lang="ar" dir="rtl">{w.word}</span>
+          <span className="arabic !py-0 text-[18px] !leading-[44px] text-ink" lang="ar" dir="rtl">{w.word}</span>
         </div>
         <div className="min-w-[10.5rem] flex-1">
           {w.meaningMissing ? (
@@ -28,29 +28,29 @@ function WordRow({ w, index, value, onChange, onFocus, result, suggestions, onPi
               onFocus={onFocus}
               aria-label={w.word} dir="auto"
               autoComplete="off" autoCorrect="off" autoCapitalize="none" spellCheck={false}
-              className={`field ui-text !min-h-[44px] ${state === 'ok' ? '!border-ok !bg-ok-soft' : ''} ${state === 'bad' ? '!border-bad !bg-bad-soft' : ''}`}
+              className={`field ui-text !min-h-[44px] ${/[\u0600-\u06FF]/.test(value ?? '') ? '!text-[17px]' : '!text-[11px]'} ${state === 'ok' ? '!border-ok !bg-ok-soft' : ''} ${state === 'bad' ? '!border-bad !bg-bad-soft' : ''}`}
             />
+          )}
+          {active && suggestions.length > 0 && (
+            <div className="fade-in mt-1 rounded-[14px] bg-cream-deep px-[14px] py-[10px]">
+              <p className="ui-text mb-0.5 text-[10px] font-bold leading-[14px] text-ink-soft">{t.urduSuggest}</p>
+              <div className="flex flex-wrap gap-2">
+                {suggestions.map((s) => (
+                  <button key={s} type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => onPick(s)} className="-my-2 inline-flex min-h-[44px] items-center">
+                    <span className="ui-text inline-flex h-7 items-center rounded-full border-[1.5px] border-gold-soft bg-white px-3.5 text-[14px] font-bold text-ink">{s}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {result && (
+            <p className={`ui-text mt-2 flex items-center gap-2 text-[12px] font-bold ${result.correct ? 'text-ok' : 'text-bad'}`}>
+              {result.correct ? <Check size={15} /> : <X size={15} />}
+              {result.correct ? t.right : <>{t.correctAnswer}: <span className="text-[13px]">{result.meaning}</span></>}
+            </p>
           )}
         </div>
       </div>
-      {active && suggestions.length > 0 && (
-        <div className="fade-in mt-2 rounded-[14px] bg-cream-deep p-[14px]">
-          <p className="ui-text mb-1.5 text-[10px] font-bold leading-4 text-ink-soft">{t.urduSuggest}</p>
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((s) => (
-              <button key={s} type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => onPick(s)} className="-my-2 inline-flex min-h-[44px] items-center">
-                <span className="ui-text inline-flex h-[30px] items-center rounded-full border-[1.5px] border-gold-soft bg-white px-3.5 text-[14px] font-bold text-ink">{s}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-      {result && (
-        <p className={`ui-text mt-2 flex items-center gap-2 text-[12px] font-bold ${result.correct ? 'text-ok' : 'text-bad'}`}>
-          {result.correct ? <Check size={15} /> : <X size={15} />}
-          {result.correct ? t.right : <>{t.correctAnswer}: <span className="text-[13px]">{result.meaning}</span></>}
-        </p>
-      )}
     </li>
   );
 }
@@ -94,7 +94,7 @@ export default function Sabaq() {
         {error ? <ErrorState message={errorMessage(error)} onRetry={blocked ? () => nav(lessonsUrl) : reload} />
         : loading ? <div className="space-y-4"><Skeleton className="h-[156px] !rounded-[22px]" /><Skeleton className="h-72 !rounded-[22px]" /></div> : (
           <div className="fade-in space-y-5">
-            <section className="rounded-[22px] border border-[#EBDCC3] bg-cream-deep p-[22px]">
+            <section className="rounded-[22px] border border-[#EBDCC3] bg-cream-deep px-[17px] py-[21px]">
               <h2 className="ui-text text-[21px] font-bold leading-8 text-ink">{t.sabaqIntroTitle}</h2>
               <p className="ui-text mt-[9px] text-[12.2px] font-medium leading-[23.5px] text-ink">{t.sabaqIntro}</p>
             </section>
@@ -115,7 +115,7 @@ export default function Sabaq() {
               )}
             </section>
 
-            <p className="ui-text rounded-[18px] border-e-[3px] border-gold bg-cream-deep px-4 py-[14px] text-[12.4px] font-semibold leading-[23px] text-ink">{t.sabaqTip}</p>
+            <p className="ui-text rounded-[18px] border-s-[3px] border-gold bg-cream-deep px-4 py-[14px] text-[12.4px] font-semibold leading-[23px] text-ink">{t.sabaqTip}</p>
 
             {results && checked.length > 0 && (
               <p className="ui-text rounded-xl bg-maroon-soft px-4 py-3 text-center text-[12.5px] font-bold text-maroon">
