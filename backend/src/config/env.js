@@ -30,7 +30,7 @@ function loadEnv() {
         encrypt: bool(process.env.DB_ENCRYPT, false),
         trustServerCertificate: bool(process.env.DB_TRUST_SERVER_CERT, true),
       },
-      pool: { max: 10, min: 0, idleTimeoutMillis: 30000 },
+      pool: { max: process.env.VERCEL ? 3 : 10, min: 0, idleTimeoutMillis: 30000 },
     },
   });
 }
